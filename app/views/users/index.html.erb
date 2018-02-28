@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Users</h1>
+
+<div class="people"></div>
+
+<%= link_to 'New User', new_user_path %>
+
+<script>
+$(function () {
+  $.ajax({
+    url: 'users.json',
+    type: 'GET'
+  }).done(function(data) {
+    Library.generateDataTable({
+      data: data,
+      columns: [
+        {'data': 'id'},
+        { 'render': function (a, a, row) {
+          return '<a href="/users/' + row.id + '">' + row.l_name + ', ' + row.f_name  + '</a>';
+            }
+        },
+        {
+          'render': function (a, a, row) {
+            console.log(row);
+            return moment(new Date(row.dob)).format('LL');
+          }
+        },
+        {'data': 'phone'},
+        {'data': 'email'},
+        {'render': function (a, a, row) {
+            return moment(new Date(row.created_at)).format('LL');
+          }
+        },
+        {'render': function (a, a, row) {
+            return moment(new Date(row.updated_at)).format('LL');
+          }
+        },
+        { 'render': function (a, a, row) {
+          return '<a href="/users/' + row.id + '/edit"><span class="glyphicon glyphicon-pencil"></span></a>';
+            },
+          'sorting': false
+        },
+        { 'render': function (a, a, row) {
+          return '<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/' + row.id + '"><span class="glyphicon glyphicon-trash"></span></a>';
+          },
+          'sorting': false
+        }
+      ],
+      headers: ['ID', 'Full Name', 'DOB', 'Phone Number', 'Email', 'Created', 'Last Updated', 'Edit', 'Delete'],
+      container: '.people'
+    });
+  });
+});
+ </script>
