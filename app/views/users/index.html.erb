@@ -5,10 +5,12 @@
 <div class="people"></div>
 
 <%= link_to 'New User', new_user_path %>
+<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
 
 <script>
 $(function () {
-  $.ajax({
+  if(!$('.data-table-component').length) {
+    $.ajax({
     url: 'users.json',
     type: 'GET'
   }).done(function(data) {
@@ -22,7 +24,6 @@ $(function () {
         },
         {
           'render': function (a, a, row) {
-            console.log(row);
             return moment(new Date(row.dob)).format('LL');
           }
         },
@@ -51,5 +52,6 @@ $(function () {
       container: '.people'
     });
   });
+  }
 });
  </script>

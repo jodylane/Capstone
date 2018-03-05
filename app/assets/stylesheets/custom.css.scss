@@ -16,3 +16,12 @@
   }
 }
 
+.field_with_errors {
+  padding: 0 !important;
+  display: block !important;
+  background-color: transparent !important;
+  
+  input {
+    border: 1px solid red;
+  }
+}
