@@ -1,0 +1,64 @@
+
+
+<div class="books-container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Listing Books</h1>
+  
+  <div class="books"></div>
+</div>
+
+<script>
+$(function () {
+  if(!$('.data-table-component').length) {
+    $.ajax({
+    url: 'books.json',
+    type: 'GET'
+  }).done(function(data) {
+    Library.generateDataTable({
+      data: data,
+      columns: [
+        {'data': 'id'},
+        { 'render': function (a, a, row) {
+          return '<a href="/books/' + row.id + '">' + row.title  + '</a>';
+            }
+        },
+        {'data': 'author'},
+        {'data': 'genre'},
+        {'data': 'isbn'},
+        {
+          'render': function (a, a, row) {
+            var pd = new Date(row.publish_date);
+            pd.setDate(pd.getDate() + 1);
+            pd = moment(pd).format('LL');
+            return pd;
+          }
+        },
+        {'data': 'publisher'},
+        {'render': function (a, a, row) {
+            return moment(new Date(row.created_at)).format('LL');
+          }
+        },
+        {'render': function (a, a, row) {
+            return moment(new Date(row.updated_at)).format('LL');
+          }
+        },
+        { 'render': function (a, a, row) {
+          return '<a href="/books/' + row.id + '/edit"><span class="glyphicon glyphicon-pencil"></span></a>';
+            },
+          'sorting': false
+        },
+        { 'render': function (a, a, row) {
+          return '<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/books/' + row.id + '"><span class="glyphicon glyphicon-trash"></span></a>';
+          },
+          'sorting': false
+        }
+      ],
+      headers: ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher', 'Created', 'Last Updated', 'Edit', 'Delete'],
+      container: '.books',
+      buttons: [{'path': 'books/new', 'title': 'New Book'}]
+    });
+  });
+  }
+});
+ </script>

@@ -5,6 +5,7 @@ Library.generateDataTable = function (props) {
         var defaultProps = {
             language: {},
             options: {},
+            buttons: [],
             id: 'data-table-' + Date.now()
         };
 
@@ -62,12 +63,29 @@ Library.generateDataTable = function (props) {
 
     var options = mergedOptions();
     var language = mergedLanguageSettings();
+    
+    // <div class="dt-filter-helper">
+    //     <div class="dt-filter dt-filter-right"><div></div></div>
+    //     <div class="right"><div></div></div>
+    //     <div class="dt-table-border dt-table-bg-blue"><div></div></div>
+    //     <div>
+    //         <div class="dt-info">
+    //             <div class="col-md-6"><div></div></div>
+    function renderButtons(array) {
+        var btn = '';
+        $.each(array, function (key, value) {
+            btn += '<a class="btn btn-success" href="' + value.path + '">' + value.title + '</a>';
+        });
+        
+        return btn;
+    }   
 
-    var dom = '<"dt-filter-helper" <"dt-filter dt-filter-right" f> <"right" B> <"dt-table-border dt-table-bg-blue" t> < <"dt-info padding-reset" <"col-md-6 padding-reset" l>';
+    var dom = '<"dt-filter-container" <"dt-search" f><"dt-buttons">><"dt-table dt-stripe-blue" t><"row dt-info-container" <"col-md-5" l>';
+
     if (options.showInfo) {
-      dom += 'i>';
+      dom += '<"col-md-2" i>';
     }
-    dom += 'p>r>';
+    dom += '<"col-md-5" p>>';
 
     $('#' + props.id).DataTable({
         'language': language,
@@ -77,6 +95,10 @@ Library.generateDataTable = function (props) {
         'sort': options.sort,
         'scrollY': options.scrollY,
         'columns': props.columns,
-        'dom': dom
+        'dom': dom,
+        'fnInitComplete': function (oSettings, JSON) {
+            console.log(oSettings, JSON);
+            $(props.container + ' .dt-buttons').html(renderButtons(props.buttons));
+        }
     });
 };

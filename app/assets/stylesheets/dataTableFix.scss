@@ -1,98 +1,91 @@
-
 .data-table-component {
+  margin-top: 20px;
+  
+  .dataTables_scrollBody {
+    table tbody tr {
+      &:nth-child(odd) {
+        background-color: rgba(69,177,232,0.03);
+      }
+      
+      td {
+        border: none;
+      }
+    }
+  }
+  
   .glyphicon {
     padding-left: 8px;
   }
+  
   .glyphicon-trash {
     color: red;
-    
     padding-left: 12px;
   }
   
   .paginate_button {
     padding: 0 3px;
   }
-}
-.pagination-bar {
-  margin-bottom: 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ccc !important;
-
-  .page-info {
-    margin-top: 13px;
+  
+  .dt-buttons {
+    float: right;
   }
 }
 
 .dataTables_info {
-  float: left;
-  padding-top: 6px !important;
+  padding-top: 0 !important;
 }
 
-.dataTables_paginate,
-.pagination-bar {
+.dt-info-container {
+  margin-top: 20px;
+}
 
-  .click-disabled,
-  .disabled {
-    a {
-      pointer-events: none;
-      color: #ccc !important;
+.dataTables_paginate {
+  a.paginate_button {
+    background-color: #fff;
+    border: 1px solid #646569 !important;
+    color: #646569 !important;
+    border-radius: 0;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-right: none !important;
+  }
+  
+  a.paginate_button,
+  a.previous,
+  a.next {
+    &:hover {
+      color: #33b5e5 !important;
     }
   }
-
-  .paginate_button,
-  .paginate-button {
-    a {
-      background-color: #fff !important;
-      border-color: #646569 !important;
-      color: #646569 !important;
-      border-radius: 0;
-    }
+  
+  a.click-disabled,
+  a.disabled {
+    pointer-events: none;
+    color: #ccc !important;
   }
+  
+  a.current {
+    color: #fff !important;
+    background-color: #45b1e8 !important;
 
-  .paginate_button,
-  .paginate-button,
-  .previous,
-  .next {
-    a {
-      &:hover {
-        background-color:#fff !important;
-        color: #33b5e5 !important;
-        border-color: #646569 !important;
-      }
-    }
-  }
-
-  .active {
-    a {
-      color: #fff !important;
+    &:hover {
+       color: #fff !important;
       background-color: #45b1e8 !important;
+    }
 
-      &:hover {
-        color: #fff !important;
-        background-color: #45b1e8 !important;
-      }
-
-      &:focus {
-        outline: none;
-      }
+    &:focus {
+      outline: none;
     }
   }
-
-  .next a,
-  .next {
+  
+  a.next {
     border-top-right-radius: 5px !important;
     border-bottom-right-radius: 5px !important;
+    border-right: 1px solid #646569 !important;
   }
 
-  .next,
-  .previous {
-    a {
-      border: 1px solid #646569 !important;
-    }
-  }
-
-  .previous a,
-  .previous {
+  a.previous {
     border-top-left-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
   }

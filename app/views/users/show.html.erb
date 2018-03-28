@@ -1,42 +1,51 @@
 <div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p>
+        <strong>First Name:</strong>
+        <%= @user.f_name %>
+      </p>
+      
+      <p>
+        <strong>Last Name:</strong>
+        <%= @user.l_name %>
+      </p>
+      
+      <p id="dob">
+        <strong>Date of Birth:</strong>
+        
+      </p>
+      
+      <p>
+        <strong>Phone Number:</strong>
+        <%= @user.phone %>
+      </p>
+      
+      <p>
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </p>
+      <%= link_to 'Edit', edit_user_path(@user) %> |
+      <%= link_to 'Back', users_path %>
+    </div>
+  </div>
   <p id="notice"><%= notice %></p>
   
-  <p>
-    <strong>First Name:</strong>
-    <%= @user.f_name %>
-  </p>
   
-  <p>
-    <strong>Last Name:</strong>
-    <%= @user.l_name %>
-  </p>
   
-  <p id="dob">
-    <strong>Date of Birth:</strong>
-    
-  </p>
-  
-  <p>
-    <strong>Phone Number:</strong>
-    <%= @user.phone %>
-  </p>
-  
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
-  
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
+ 
 </div>
 
 
 <script>
-    var dob = "<%= @user.dob %>";
-    dob = new Date(dob);
-    dob = moment(dob).format('L');
-    
-    var dobRef = document.querySelector('#dob');
-    
-    dobRef.innerHTML += dob;
-  </script>
+  var dob = "<%= @user.dob %>";
+
+  dob = new Date(dob);
+  dob.setDate(dob.getDate() + 1);
+  dob = moment(dob).format('LL');
+  console.log(dob)
+  
+  var dobRef = document.querySelector('#dob');
+  
+  dobRef.innerHTML += dob;
+</script>

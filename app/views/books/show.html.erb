@@ -1,0 +1,69 @@
+<div class="col-md-5">
+  <p id="notice"><%= notice %></p>
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+          <img src="<%= @book.image %>"/>
+        </div>
+        
+        <div class="col-md-8">
+          <p>
+            <strong>Title:</strong>
+            <%= @book.title %>
+          </p>
+          
+          <p>
+            <strong>Author:</strong>
+            <%= @book.author %>
+          </p>
+          
+          <p>
+            <strong>Genre:</strong>
+            <%= @book.genre %>
+          </p>
+          
+          <p>
+            <strong>Isbn:</strong>
+            <%= @book.isbn %>
+          </p>
+          
+          <p id="publish-date">
+            <strong>Publish date:</strong>
+            
+          </p>
+          
+          <p>
+            <strong>Publisher:</strong>
+            <%= @book.publisher %>
+          </p>
+          
+          <%= link_to 'Edit', edit_book_path(@book) %> |
+          <%= link_to 'Back', books_path %>
+        </div>
+      </div>
+      
+      <div class="row col-md-12">
+        <p>
+          <strong>Description:</strong>
+          <%= @book.description %>
+        </p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  var pd = "<%= @book.publish_date %>";
+
+  pd = new Date(pd);
+  pd.setDate(pd.getDate() + 1);
+  pd = moment(pd).format('LL');
+  console.log(pd)
+  
+  var pdRef = document.querySelector('#publish-date');
+  
+  pdRef.innerHTML += pd;
+</script>

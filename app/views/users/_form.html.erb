@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :dob, "Date of Birth" %><br>
-    <input type="text" name="user[dob]" id="user_dob" class="form-control datepicker-edit" data-provide='datepicker'>
+    <input type="text" name="user[dob]" id="user_dob" class="form-control datepicker-edit">
   </div>
   <div class="field">
     <%= f.label :phone, "Phone Number" %><br>
@@ -34,6 +34,27 @@
   <div class="actions">
     <%= f.submit "Update", class: "btn btn-success" %>
   </div>
+  
+  <script>
+    $(function () {
+      $('.datepicker-edit').datepicker({
+        format: {
+          toDisplay: function (date, format, language) {
+            var d = new Date(date);
+            d.setDate(d.getDate() + 1);
+            d = moment(d).format('YYYY/MM/DD');
+            return d
+          },
+          toValue: function (date, format, language) {
+            var d = new Date(date);
+            d.setDate(d.getDate() + 1);
+            d = moment(d).format('YYYY/MM/DD');
+            return d
+          }
+        }
+      });
+    });
+  </script>
 <% end %>
 
 

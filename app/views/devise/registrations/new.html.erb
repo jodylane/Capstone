@@ -21,7 +21,7 @@
     
     <div class="field">
       <%= f.label :dob, "Date of Birth" %><br />
-     <input type="text"  class="form-control datepicker">
+     <input type="text" name='user[dob]' class="form-control datepicker">
     </div>
     
     <div class="field">
@@ -53,7 +53,20 @@
 <script>
   $(function () {
     $('.datepicker').datepicker({
-      format: 'dd/mm/yyyy'
+      format: {
+          toDisplay: function (date, format, language) {
+            var d = new Date(date);
+            d.setDate(d.getDate() + 1);
+            d = moment(d).format('YYYY/MM/DD');
+            return d
+          },
+          toValue: function (date, format, language) {
+            var d = new Date(date);
+            d.setDate(d.getDate() + 1);
+            d = moment(d).format('YYYY/MM/DD');
+            return d
+          }
+        }
     });
   });
 </script>

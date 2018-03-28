@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  *= require custom
- *= require dataTables
  *= require dataTables.bootstrap
  *= require bootstrap-datepicker3
  */
