@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-debounce
 //= require turbolinks
 //= require_tree .
 //= require moment

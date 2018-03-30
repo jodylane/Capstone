@@ -15,9 +15,8 @@ $(function () {
     url: 'books.json',
     type: 'GET'
   }).done(function(data) {
-    Library.generateDataTable({
-      data: data,
-      columns: [
+      $.debounce(function () {
+           var columns = [
         {'data': 'id'},
         { 'render': function (a, a, row) {
           return '<a href="/books/' + row.id + '">' + row.title  + '</a>';
@@ -34,8 +33,12 @@ $(function () {
             return pd;
           }
         },
-        {'data': 'publisher'},
-        {'render': function (a, a, row) {
+        {'data': 'publisher'}
+      ];
+    var headers = ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher'];
+    var buttons = [];
+    <% if current_user.admin? %>
+     columns.push({'render': function (a, a, row) {
             return moment(new Date(row.created_at)).format('LL');
           }
         },
@@ -52,11 +55,17 @@ $(function () {
           return '<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/books/' + row.id + '"><span class="glyphicon glyphicon-trash"></span></a>';
           },
           'sorting': false
-        }
-      ],
-      headers: ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher', 'Created', 'Last Updated', 'Edit', 'Delete'],
+        });
+      headers.concat(("Added, Last Updated, Edit, Delete").split(','));
+      buttons.push({'path': 'books/new', 'title': 'New Book'});
+    <% end %>
+      }, 250);
+    Library.generateDataTable({
+      data: data,
+      columns: columns,
+      headers: headers,
       container: '.books',
-      buttons: [{'path': 'books/new', 'title': 'New Book'}]
+      buttons: buttons
     });
   });
   }
