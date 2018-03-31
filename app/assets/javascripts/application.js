@@ -12,13 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-debounce
 //= require turbolinks
 //= require_tree .
 //= require moment
 //= require datatables/jquery.dataTables
-//= requre datatables/dataTables.bootstrap
-//= require custom_functions
+//= require datatables/dataTables.bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
+//= require bootstrap.min
+//= require custom_functions

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :require_admin, only: [:index, :new, :create, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :show]
+
 
   # GET /users
   # GET /users.json
@@ -72,4 +75,12 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:f_name, :l_name, :dob, :phone, :email)
     end
+    
+    def require_same_user
+      if current_user != @user and !current_user.admin?
+        flash[:danger] = 'You can only edit your own profile.'
+        redirect_to root_path
+      end
+    end
+    
 end

@@ -15,9 +15,7 @@ $(function () {
     url: 'books.json',
     type: 'GET'
   }).done(function(data) {
-      $.debounce(function () {
-           var columns = [
-        {'data': 'id'},
+    var columns = [{'data': 'id'},
         { 'render': function (a, a, row) {
           return '<a href="/books/' + row.id + '">' + row.title  + '</a>';
             }
@@ -33,33 +31,36 @@ $(function () {
             return pd;
           }
         },
-        {'data': 'publisher'}
-      ];
-    var headers = ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher'];
-    var buttons = [];
-    <% if current_user.admin? %>
-     columns.push({'render': function (a, a, row) {
+        {'data': 'publisher'},
+        {'render': function (a, a, row) {
             return moment(new Date(row.created_at)).format('LL');
           }
         },
         {'render': function (a, a, row) {
             return moment(new Date(row.updated_at)).format('LL');
           }
-        },
-        { 'render': function (a, a, row) {
-          return '<a href="/books/' + row.id + '/edit"><span class="glyphicon glyphicon-pencil"></span></a>';
+        }];
+    var headers = ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher', 'Created', 'Last Updated'];
+    var buttons = [];
+    
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        columns.push(
+          { 'render': function (a, a, row) {
+              return '<a href="/books/' + row.id + '/edit"><span class="glyphicon glyphicon-pencil"></span></a>';
             },
-          'sorting': false
-        },
-        { 'render': function (a, a, row) {
-          return '<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/books/' + row.id + '"><span class="glyphicon glyphicon-trash"></span></a>';
+            'sorting': false
           },
-          'sorting': false
+          { 'render': function (a, a, row) {
+              return '<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/books/' + row.id + '"><span class="glyphicon glyphicon-trash"></span></a>';
+            },
+            'sorting': false
         });
-      headers.concat(("Added, Last Updated, Edit, Delete").split(','));
-      buttons.push({'path': 'books/new', 'title': 'New Book'});
+        headers = headers.concat(("Edit, Delete").split(','));
+        buttons.push({'path': 'books/new', 'title': 'New Book'});
+      <% end %>
     <% end %>
-      }, 250);
+    
     Library.generateDataTable({
       data: data,
       columns: columns,
