@@ -24,3 +24,13 @@
 .navbar {
   border-radius: 0;
 }
+
+.panel-default .panel-heading.form-view {
+  background-color: rgba(69,177,232,0.03);
+}
+
+textarea {
+  min-height: 225px;
+  min-width: 100%;
+  max-width: 100%;
+}

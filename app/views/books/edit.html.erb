@@ -1,8 +1,16 @@
-<div class="col-md-4">
-  <h1>Editing Book</h1>
-  
-  <%= render 'form' %>
-  
-  <%= link_to 'Show', @book %> |
-  <%= link_to 'Back', books_path %>
+<div class="col-xs-8 col-xs-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading form-view">
+      <h2 class="panel-title">Edit <%= @book.title %> <small>by <%= @book.author %></small></h2>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <%= render 'form' %>
+      </div>
+      <div class="row text-center">
+        <%= link_to 'Show', @book %> |
+        <%= link_to 'Back', books_path %>
+      </div>
+    </div>
+  </div>
 </div>

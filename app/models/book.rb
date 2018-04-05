@@ -8,5 +8,5 @@ class Book < ActiveRecord::Base
   validates :publish_date, presence: true
   validates :publisher, presence: true
   validates :description, presence: true,
-            length: { minimum: 20, maximum: 500 }
+            length: { minimum: 20, maximum: 1000 }
 end

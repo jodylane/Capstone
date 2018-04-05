@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   validates :f_name, presence: true
   validates :l_name, presence: true
   validates :dob, presence: true
+  
+  def full_name
+    "#{self.f_name} #{self.l_name}"
+  end
 end

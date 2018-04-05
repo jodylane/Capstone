@@ -8,6 +8,10 @@ class BooksController < ApplicationController
   def index
     @books = Book.all
   end
+  
+  def home
+    redirect_to books_path if user_signed_in?
+  end
 
   # GET /books/1
   # GET /books/1.json

@@ -6,3 +6,21 @@
   <%= link_to 'Show', @user %> |
   <%= link_to 'Back', users_path %>
 </div>
+
+
+<div class="col-xs-8 col-xs-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading form-view">
+      <h2 class="panel-title">Edit <%= "#{@user.full_name}'s" %> profile</h2>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <%= render 'form' %>
+      </div>
+      <div class="row text-center">
+        <%= link_to 'Show', @book %> |
+        <%= link_to 'Back', books_path %>
+      </div>
+    </div>
+  </div>
+</div>
