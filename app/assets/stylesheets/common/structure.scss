@@ -59,3 +59,27 @@ textarea {
  .jumbotron {
    border-radius: 8px;
  }
+ 
+ .right {
+   float: right;
+ }
+ 
+  .left {
+   float: left;
+ }
+ 
+ .panel-heading-title {
+   height: 40px;
+ }
+ 
+ .margin-top {
+   margin-top: 20px;
+ }
+ 
+ .glyphicon-th {
+   cursor: pointer;
+   font-size: 17.5px;
+   &:hover {
+     color: #ccc;
+   }
+ }
