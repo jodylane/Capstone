@@ -51,7 +51,7 @@ Library.generateDataTable = function (props) {
         return headers;
     }
 
-    $(props.container).append('<div class="data-table-component col-md-10 col-md-offset-1">' +
+    $(props.container).append('<div class="data-table-component col-xs-12">' +
         '<table class="data-table-wrapper table-striped table" id="' + props.id + '">' +
             '<thead>' +
                 '<tr class="data-table-headers">' +
