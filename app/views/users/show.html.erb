@@ -30,10 +30,6 @@
     </div>
   </div>
   <p id="notice"><%= notice %></p>
-  
-  
-  
- 
 </div>
 
 
@@ -45,7 +41,5 @@
   dob = moment(dob).format('LL');
   console.log(dob)
   
-  var dobRef = document.querySelector('#dob');
-  
-  dobRef.innerHTML += dob;
+  $('#dob').append(dob);
 </script>

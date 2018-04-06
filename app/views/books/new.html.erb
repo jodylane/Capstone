@@ -1,7 +1,15 @@
-<div class="col-md-4">
-  <h1>New Book</h1>
-  
-  <%= render 'form' %>
-  
-  <%= link_to 'Back', books_path %>
+<div class="col-xs-8 col-xs-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading form-view">
+      <h2 class="panel-title">Add a New Book Listing</h2>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <%= render 'form' %>
+      </div>
+      <div class="row text-center">
+        <%= link_to 'Back', books_path %>
+      </div>
+    </div>
+  </div>
 </div>
