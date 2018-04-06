@@ -64,13 +64,6 @@ Library.generateDataTable = function (props) {
     var options = mergedOptions();
     var language = mergedLanguageSettings();
     
-    // <div class="dt-filter-helper">
-    //     <div class="dt-filter dt-filter-right"><div></div></div>
-    //     <div class="right"><div></div></div>
-    //     <div class="dt-table-border dt-table-bg-blue"><div></div></div>
-    //     <div>
-    //         <div class="dt-info">
-    //             <div class="col-md-6"><div></div></div>
     function renderButtons(array) {
         var btn = '';
         $.each(array, function (key, value) {
