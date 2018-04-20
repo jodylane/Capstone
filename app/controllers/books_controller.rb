@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   before_action :require_admin, except: [:index, :show, :home]
   
   def index
-    @books = Book.all
+    @books = Book.all_except(get_cart)
   end
   
   def home
@@ -12,7 +12,22 @@ class BooksController < ApplicationController
   end
   
   def show
-
+    
+  end
+  
+  def cart
+    Cart.new(session).add_to_cart(params[:id])
+    redirect_to show_cart_book_path
+  end
+  
+  def showcart
+    @books = Book.where(id: get_cart)
+  end
+  
+  def checkout 
+    Book.where(id: get_cart).update_all(status: false)
+    session[:cart] = [];
+    redirect_to books_path
   end
 
   def new
@@ -63,6 +78,10 @@ class BooksController < ApplicationController
     end
     
     def book_params
-      params.require(:book).permit(:title, :author, :genre, :isbn, :publish_date, :publisher, :description, :image)
+      params.require(:book).permit(:title, :author, :genre, :isbn, :publish_date, :publisher, :status, :description, :image)
+    end
+    
+    def get_cart
+      Cart.new(session).get_cart
     end
 end

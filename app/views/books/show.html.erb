@@ -45,7 +45,9 @@
             <% if current_user.admin? %>
               | <%= link_to 'Edit', edit_book_path(@book) %> 
             <% end %>
-            | <a href="#">Checkout</a> 
+            <% if @book.status %>
+            | <%= link_to 'Add to Cart', cart_book_path%>
+            <% end %>
           <% end %>
           
         </div>

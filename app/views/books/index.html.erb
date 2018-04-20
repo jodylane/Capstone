@@ -6,7 +6,34 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="books"></div>
+        <div class="books-table"></div>
+        <div class="book-cards" style="display:none;">
+          <div class="col-md-12">
+            <% @books.each_with_index do |book, index| %>
+              <% if index % 5 == 0 %>
+                <div class="row card-row">
+              <% end %>
+              
+              <div class="col-md-2">
+                <a href="/books/<%= book.id %>">
+                  <div class="thumbnail">
+                    <img src="<%= book.image %>" alt="<%= book.title %>"/>
+                    <div class="caption">
+                      <h4><%= book.title %></h4>
+                      <p><%= book.author %></p>
+                      <p><%= book.genre %></p>
+                      <p><%= book.status ? 'available' : 'unavailable' %></p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              
+              <% if index % 5 == 4 || index == @books.count - 1  %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -19,6 +46,7 @@ $(function () {
     url: 'books.json',
     type: 'GET'
   }).done(function(data) {
+    console.log('data', data);
     var columns = [{'data': 'id'},
         { 'render': function (a, a, row) {
           return '<a href="/books/' + row.id + '">' + row.title  + '</a>';
@@ -37,6 +65,10 @@ $(function () {
         },
         {'data': 'publisher'},
         {'render': function (a, a, row) {
+            return row.status ? 'available' : 'unavailable';
+          }
+        },
+        {'render': function (a, a, row) {
             return moment(new Date(row.created_at)).format('LL');
           }
         },
@@ -44,7 +76,7 @@ $(function () {
             return moment(new Date(row.updated_at)).format('LL');
           }
         }];
-    var headers = ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher', 'Created', 'Last Updated'];
+    var headers = ['ID', 'Title', 'Author', 'Genre', 'ISBN', 'Publish Date', 'Publisher', 'Status', 'Created', 'Last Updated'];
     var buttons = [];
     
     <% if user_signed_in? %>
@@ -69,10 +101,24 @@ $(function () {
       data: data,
       columns: columns,
       headers: headers,
-      container: '.books',
+      container: '.books-table',
       buttons: buttons
     });
   });
   }
+  
+  var inProcess = false;
+  $('.glyphicon-th, .glyphicon-th-list').on('click', function () {
+    
+    var action = $(this).hasClass('glyphicon-th');
+    var classToAdd = action ? 'glyphicon-th-list' : 'glyphicon-th';
+    var classToRemove = action ? 'glyphicon-th' : 'glyphicon-th-list';
+    
+    $(this).toggleClass(classToAdd, true).removeClass(classToRemove);
+    var classToHide = action ? 'books-table' : 'book-cards';
+    var classToShow = action ? 'book-cards' : 'books-table';
+    $('.' + classToHide).hide();
+    $('.' + classToShow).show();
+  })
 });
  </script>

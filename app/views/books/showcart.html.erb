@@ -1,0 +1,30 @@
+<div class="col-xs-10 col-xs-offset-1">
+  <div class="panel panel-default">
+    <div class="panel-heading-title panel-heading form-view">
+      <h2 class="panel-title left">Shopping Cart</h2>
+    </div>
+    <div class="panel-body">
+      <div class="row col-md-10 col-md-offset-1">
+        <table class='table table-striped'>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Genre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @books.each_with_index do |book, index| %>
+              <tr>
+                <td><%= book.title %></td>
+                <td><%= book.author %></td>
+                <td><%= book.genre %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to 'checkout', checkout_book_path %>
+      </div>
+    </div>
+  </div>
+</div>

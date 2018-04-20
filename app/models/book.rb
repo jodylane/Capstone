@@ -9,4 +9,8 @@ class Book < ActiveRecord::Base
   validates :publisher, presence: true
   validates :description, presence: true,
             length: { minimum: 20, maximum: 1000 }
+            
+  def self.all_except(books)
+    where.not(id: books)
+  end
 end
